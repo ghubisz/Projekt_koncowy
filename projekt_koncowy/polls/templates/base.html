@@ -1,0 +1,53 @@
+<! DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polls</title>
+    <link href="" rel="stylesheet" integrity="sha384-giJF6kkoqNQOOvy+HMDP7azOuLOxtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+<h1>Lista produktów</h1>
+    <div class="container mt-3">
+        <a href="{% url 'categories'%}">Category list</a>
+        <a href="{% url 'create'%}">Add new product</a>
+        <a>Product list</a>
+        <a href="{% url 'shopping_list'%}">View shopping list</a>
+        <a href="{% url 'list_buy_product'%}">History</a>
+        <a href="{% url 'list_request_product'%}">Request</a>
+        <a href="{% url 'logout'%}">Logout</a>
+        <hr>
+        <table id="storage" name="storage" class="storage">
+            <th>
+                <tr>
+                    <td>Name:</td>
+                    <td>Description:</td>
+                    <td>Quantity:</td>
+                    <td>Price:</td>
+                    <td>Category:</td>
+                    <td></td>
+                </tr>
+            </th>
+            <tbody>
+                {% for data in queryset %}
+                <tr class="storage_item">
+                    <td id="product_name" class="item_value">{{data.name}}</td>
+                    <td id="product_description" class="item_value">{{data.description}}</td>
+                    <td id="product_quantity" class="item_value">{{data.quantity}}</td>
+                    <td id="product_price" class="item_value">{{data.price}}</td>
+                    <td id="product_category" class="item_value">{{data.category}}</td>
+                    <td id="product_operations" class=""item_value">
+                        <a href="product/{{data.id}}/add_to_shopping">Dodaj do listy zakupów</a>
+                        <a href="product/{{data.id}}/delete">Usuń ze spiżarni</a>
+                        <a href="product/{{data.id}}/update">Edytuj</a>
+
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <hr>
+    </div>
+</body>
+</html>
