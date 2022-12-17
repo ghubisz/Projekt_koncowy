@@ -238,7 +238,7 @@ class TestDeleteProductFormView(TestCase):
         print("Method:test_delete_product_formview_1")
         self.assertTemplateUsed('productmodel_confirm_delete.html')
 
-    @pytest.mark.django_db
+
     def test_test_delete_product_formview_2(self):
         print("Method:test_test_delete_product_formview_2")
         self.username = "jrandomuser"
@@ -252,9 +252,12 @@ class TestDeleteProductFormView(TestCase):
         tproduct = Product(name="test_name",description="test_description",price=9.99,quantity=1,category=tcategory)
         tproduct.save()
 
+        nproduct = Product.objects.all().last()
+        url = '/polls/product/' + str(nproduct.id)+ '/delete/'
+
         self.client.login(username=self.username, password=self.password)
     #   self.assertTrue(loginresp, 'Could not log in')
-        loginresp = self.client.get('/polls/product/1/delete/', follow=True)
+        loginresp = self.client.get(url, follow=True)
         #ipdb.set_trace()
         self.assertContains(loginresp, "Are you sure you want to delete")
 #
@@ -283,10 +286,12 @@ class UpdateProductFormView(TestCase):
         tproduct = Product(name="test_name", description="test_description", price=9.99, quantity=1, category=tcategory)
         tproduct.save()
 
+        nproduct = Product.objects.all().last()
+        url = '/polls/product/'+str(nproduct.id)+'/update/'
 
         self.client.login(username=self.username, password=self.password)
         #   self.assertTrue(loginresp, 'Could not log in')
-        loginresp = self.client.get('/polls/product/2/update/', follow=True)
+        loginresp = self.client.get(url, follow=True)
         #ipdb.set_trace()
         self.assertContains(loginresp, "Save")
 
@@ -323,37 +328,7 @@ class AddProductToShopping(TestCase):
         self.assertContains(loginresp, "Shopping List")
 
 
-class BuyProductFormView(TestCase):
-    @classmethod
-    def setUpTest(cls):
-        print("setUpTestData: Run once to set up non-modified data for all class methods.")
-        pass
 
-    def setUp(self):
-        print("setUp: Run once for every test method to setup clean data.")
-        pass
-
-    def test_buy_product_formview_1(self):
-        print("Method:test_buy_product_formview_1")
-        self.assertTemplateUsed('history.html')
-
-    # def test_buy_product_formview_2(self):
-    #     print("Methpd:test_buy_product_formview_2")
-    #     self.username = "jrandomuser"
-    #     self.password = "qwerty123"
-    #     user = User.objects.create(username=self.username)
-    #     user.set_password(self.password)
-    #     user.save()
-    #
-    #     tcategory=Category(name="test_category")
-    #     tcategory.save()
-    #     tproduct = Product(name="test_name", description="test_description", price=9.99, quantity=1, category=tcategory)
-    #     tproduct.save()
-    #
-    #     self.client.login(username=self.username, password=self.password)
-    # #   self.assertTrue(loginresp, 'Could not log in')
-    #     loginresp = self.client.get('/polls/product/1/buy', follow=True)
-    #     self.assertContains(loginresp, "History")
 
 
 class RequestProductFormView(TestCase):
@@ -370,24 +345,29 @@ class RequestProductFormView(TestCase):
         print("Method:test_request_product_formview_1")
         self.assertTemplateUsed('request.html')
 
-    # def test_request_product_formview_2(self):
-    #     print("Method:test_request_product_formview_2")
-    #     self.username = "jrandomuser"
-    #     self.password = "qwerty123"
-    #     user = User.objects.create(username=self.username)
-    #     user.set_password(self.password)
-    #     user.save()
-    #
-    #     tcategory=Category(name="test_category")
-    #     tcategory.save()
-    #     tproduct = Product(name="test_name", description="test_description", price=9.99, quantity=1, category=tcategory)
-    #     tproduct.save()
-    #
-    #
-    #     self.client.login(username=self.username, password=self.password)
-    # #   self.assertTrue(loginresp, 'Could not log in')
-    #     loginresp = self.client.get('/polls/product/1/request/', follow=True)
-    #     self.assertContains(loginresp, "Zapotrzebowanie")
+    def test_request_product_formview_2(self):
+        print("Method:test_request_product_formview_2")
+        self.username = "jrandomuser"
+        self.password = "qwerty123"
+        user = User.objects.create(username=self.username)
+        user.set_password(self.password)
+        user.save()
+
+        tcategory=Category(name="test_category")
+        tcategory.save()
+        tproduct = Product(name="test_name", description="test_description", price=9.99, quantity=1, category=tcategory)
+        tproduct.save()
+
+        nproduct = Product.objects.all().last()
+        url = '/polls/product/' + str(nproduct.id) + '/request/'
+
+
+
+
+        self.client.login(username=self.username, password=self.password)
+    #   self.assertTrue(loginresp, 'Could not log in')
+        loginresp = self.client.get(url, follow=True)
+        self.assertContains(loginresp, "Zapotrzebowanie")
 
 
 class ListBuyProductFormView(TestCase):
@@ -444,3 +424,39 @@ class ListRequestProductFormView(TestCase):
         #   self.assertTrue(loginresp, 'Could not log in')
         loginresp = self.client.get('/polls/request/', follow=True)
         self.assertContains(loginresp, "Zapotrzebowanie")
+
+
+class BuyProductFormView(TestCase):
+    @classmethod
+    def setUpTest(cls):
+        print("setUpTestData: Run once to set up non-modified data for all class methods.")
+        pass
+
+    def setUp(self):
+        print("setUp: Run once for every test method to setup clean data.")
+        pass
+
+    def test_buy_product_formview_1(self):
+        print("Method:test_buy_product_formview_1")
+        self.assertTemplateUsed('history.html')
+
+    def test_buy_product_formview_2(self):
+        print("Methpd:test_buy_product_formview_2")
+        self.username = "jrandomuser"
+        self.password = "qwerty123"
+        user = User.objects.create(username=self.username)
+        user.set_password(self.password)
+        user.save()
+
+        tcategory=Category(name="test_category")
+        tcategory.save()
+        tproduct = Product(name="test_name", description="test_description", price=9.99, quantity=1, category=tcategory)
+        tproduct.save()
+
+        nproduct = Product.objects.all().last()
+        url = '/polls/product/' + str(nproduct.id) + '/buy/'
+
+        self.client.login(username=self.username, password=self.password)
+    #   self.assertTrue(loginresp, 'Could not log in')
+        loginresp = self.client.get(url, follow=True)
+        self.assertContains(loginresp, "History")

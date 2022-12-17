@@ -72,9 +72,6 @@ def add_product(request):
     return render(request, 'shopping_list.html', context)
 
 
-# dodanie liczby produktów
-# def add_number_of_products(request, product):
-#   return HttpResponse()
 
 # Funkcja tylko dla zalogowanych użytkowników wyświetla listę posiadanych produktów.
 @login_required
@@ -162,6 +159,7 @@ class UpdateProductFormView(LoginRequiredMixin, UpdateView):
     success_url = '/polls'
 
 
+#Klasa ma za zadanie dodawać produkty do listy zakupów i ją wyświetlać.
 class AddProductToShopping(LoginRequiredMixin, CreateView):
     def get(self, request,pk):
         currUser = request.user
@@ -179,6 +177,7 @@ class AddProductToShopping(LoginRequiredMixin, CreateView):
         return render(request, 'shopping_list.html', context)
 
 
+#Klasa ma za zadanie zapisywać do Historii produkty po przejściu przyciskiem Buy.
 class BuyProductFormView(LoginRequiredMixin, CreateView):
     def get(self, request,pk):
         product_id = pk
@@ -197,7 +196,7 @@ class BuyProductFormView(LoginRequiredMixin, CreateView):
 
 
 
-
+#Klasa ma za zadanie dodawać nowy produkt do kategorii Zapotrzebowanie.
 class RequestProductFormView(LoginRequiredMixin, CreateView):
     def get(self, request,pk):
         product_id = pk
@@ -215,6 +214,7 @@ class RequestProductFormView(LoginRequiredMixin, CreateView):
         return render(request, 'request.html', context)
 
 
+#Klasa ma za zadanie wyświetlać historię zakupów.
 class ListBuyProductFormView(LoginRequiredMixin, CreateView):
     def get(self, request):
 
@@ -226,6 +226,7 @@ class ListBuyProductFormView(LoginRequiredMixin, CreateView):
         return render(request, 'history.html', context)
 
 
+#Klasa ma za zadanie wyświelać produkty dodane jako Zapotrzebowanie.
 class ListRequestProductFormView(LoginRequiredMixin, CreateView):
     def get(self, request):
 
