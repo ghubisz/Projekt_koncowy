@@ -13,3 +13,6 @@ Musiała spełniać następujące wymagania:
 8. Aplikacja powinna posiadać przynajmniej jeden formularz, obslugiwany metodą POST.
 9. Główne funkcjonalności aplikacji, powinny być pokryte testami (co najmniej 3 testy jednostkowe napisane przy użyciu pytest’a). Do każdego widoku powinny być co najmniej dwa testy. 
 10. Każda klasa I funkcja powinna posiadać przynajmniej jednolinijkową dokumentację.
+
+
+Dalsze zmiany i ulepszenia znajdują się w repozytorium "Jedzonko".
