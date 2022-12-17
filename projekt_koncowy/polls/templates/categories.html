@@ -1,0 +1,39 @@
+<! DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polls - Categories</title>
+    <link href="" rel="stylesheet" integrity="sha384-giJF6kkoqNQOOvy+HMDP7azOuLOxtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+<h1>Kategorie produktów</h1>
+    <div class="container mt-3">
+        <a>Category list</a>
+        <a href="{% url 'createcategory'%}">Add new category</a>
+        <a href="{% url 'products'%}">Product list</a>
+        <a href="{% url 'shopping_list'%}">View shopping list</a>
+        <a href="{% url 'list_buy_product'%}">History</a>
+        <a href="{% url 'list_request_product'%}">Request</a>
+        <a href="{% url 'logout'%}">Logout</a>
+
+
+        <hr>
+        <table id="categories" name="categories" class="categories">
+            <th>
+                <tr>
+                    <td>Name:</td>
+                </tr>
+            </th>
+            <tbody>
+                {% for data in queryset %}
+                <tr class="category_item">
+                    <td id="category_name" class="item_value">{{data.name}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <hr>
+    </div>
+</body>
+</html>
